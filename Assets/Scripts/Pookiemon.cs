@@ -183,6 +183,21 @@ public class Pookiemon : MonoBehaviour
         return healthLost;
     }
 
+    public int TakeBodyPressDamage(Pookiemon attacker, Attack attack)
+    {
+        //Super Effectiveness
+        float multiplier = GetMultiplier(attack.type, type1, type2);
+        //Crit
+        if (RollCrit(attack)) { multiplier *= 1.5f; }
+        //STAB
+        if (attack.type == type1 || attack.type == type2) { multiplier *= 1.5f; }
+        int damage = (int)(multiplier * (2 * LEVEL / 5 + 2) * attack.POWER * attacker.GetStat(Stats.DEFENSE) / GetStat(Stats.DEFENSE) / 50);
+        Debug.Log("Damage: " + damage);
+        int healthLost = Mathf.Clamp(damage, currentHealth, damage);
+        currentHealth -= damage;
+        return healthLost;
+    }
+
     private bool RollCrit(Attack a)
     {
         int roll = UnityEngine.Random.Range(1, 100);
