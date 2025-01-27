@@ -63,6 +63,8 @@ public class Pookiemon : MonoBehaviour
     private int currentHealth;
     public int CurrentHealth { get { return currentHealth; } }
 
+    public int FaintImmediately { currentHealth = 0 }
+
     [HideInInspector] public bool cantMove = false;
 
     public static float GetMultiplier(Types attackType, Types defend1, Types defender2)
